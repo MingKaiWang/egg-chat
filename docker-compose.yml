@@ -3,7 +3,7 @@ version: '3'
 services:
   egg-chat:
     image: egg-chat
-    build: .
+    build: ./server
     environment:
       NODE_ENV: production
     ports:
