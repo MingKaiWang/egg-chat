@@ -11,6 +11,5 @@ see [egg docs][egg] for more detail.
 ### Run
 
 ```bash
-$ docker-compose up
-$ open http://localhost:7001/
+$ ./run.sh
 ```
