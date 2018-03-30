@@ -6,5 +6,19 @@ services:
     build: ./server
     environment:
       NODE_ENV: production
+      MONGO_URL: mongodb://mongodb:27017/eggchat
+    depends_on:
+      - mongodb
     ports:
       - 7001:7001
+    networks: 
+      - egg-chat-backend
+  mongodb:
+    image: mongo
+    restart: unless-stopped
+    volumes:
+      - ./data/db:/data/db
+    networks: 
+      - egg-chat-backend
+networks: 
+  egg-chat-backend:

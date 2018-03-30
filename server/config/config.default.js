@@ -9,5 +9,11 @@ module.exports = appInfo => {
   // add your config here
   config.middleware = [];
 
+  //mongoose config
+  config.mongoose = {
+    url: process.env.MONGO_URL || "mongdb://mongodb:27017/eggchat",
+    options: {},
+  }
+
   return config;
 };
