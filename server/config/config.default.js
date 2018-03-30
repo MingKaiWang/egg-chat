@@ -11,7 +11,7 @@ module.exports = appInfo => {
 
   //mongoose config
   config.mongoose = {
-    url: process.env.MONGO_URL || "mongdb://mongodb:27017/eggchat",
+    url: process.env.MONGO_URL || "mongodb://mongodb:27017/eggchat",
     options: {},
   }
 
