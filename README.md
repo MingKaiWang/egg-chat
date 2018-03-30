@@ -1,15 +1,9 @@
-# chat
+# egg-chat
 
-application build on egg, mongodb, redis, vue, i-view and docker
+application build on [egg](http://eggjs.org), [mongodb](https://www.mongodb.com), [redis](https://redis.io), [vue](https://cn.vuejs.org), [i-view](https://www.iviewui.com) and [docker](https://www.docker.com/)
 
 ## QuickStart
-
-<!-- add docs here for user -->
-
-see [egg docs][egg] for more detail.
-
-### Run
-
+run the application with run.sh in the root folder.
 ```bash
 $ ./run.sh
 ```
