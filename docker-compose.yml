@@ -17,7 +17,7 @@ services:
     image: mongo
     restart: unless-stopped
     volumes:
-      - ./data/db:/data/db
+      - /data/db:/data/db
     networks: 
       - egg-chat-backend
 networks: 
