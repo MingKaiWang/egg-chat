@@ -6,7 +6,11 @@
     </row>
     <br>
     <row>
-      <i-input class="logininput" v-model="password" placeholder="password" size="large" v-bind:maxlength=25 clearable on-enter:="login" type="password"></i-input>
+      <i-input class="logininput" v-model="password" placeholder="password" size="large" v-bind:maxlength=25 clearable v-on:on-enter="login" type="password"></i-input>
+    </row>
+    <br>
+    <row>
+      <i-button class="resigterbutton" @click="register" type="text">regist a account !</i-button>
     </row>
   </div>
 </template>
@@ -22,7 +26,10 @@ export default {
   },
   methods: {
     login: function () {
-      console.log('on-enter')
+      console.log(`username: ${this.username}, password: ${this.password}`)
+    },
+    register: function () {
+      console.log(`register`)
     }
   }
 }
@@ -36,5 +43,9 @@ export default {
 .container {
   width: 300px;
   margin: 0 auto;
+}
+.resigterbutton {
+  border: none;
+  outline: none;
 }
 </style>
