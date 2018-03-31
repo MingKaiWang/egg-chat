@@ -21,6 +21,10 @@
     <row v-if="!validateChecked">
       <span class="tips">两次输入不一致,请重新输入</span>
     </row>
+    <br>
+    <row>
+      <i-button class="loginbutton" @click="login" type="text">have a account ? go to login</i-button>
+    </row>
   </div>
 </template>
 
@@ -41,8 +45,7 @@ export default {
     register: function () {
       if (this.username && this.password && this.validate && this.usernameChecked && this.passwordChecked && this.validateChecked) {
         console.log(`register`)
-      }
-      else {
+      } else {
         this.password = ''
         this.validate = ''
         this.passwordChecked = true
@@ -57,6 +60,9 @@ export default {
     },
     checkValidate: function () {
       this.validateChecked = this.password && this.password === this.validate
+    },
+    login: function () {
+      this.$router.push('/')
     }
   }
 }
@@ -77,5 +83,9 @@ export default {
 }
 .tips {
   color: #ff9900;
+}
+.loginbutton {
+  border: none;
+  outline: none;
 }
 </style>
