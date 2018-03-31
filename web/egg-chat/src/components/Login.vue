@@ -29,6 +29,7 @@ export default {
       console.log(`username: ${this.username}, password: ${this.password}`)
     },
     register: function () {
+      this.$router.push('/register')
       console.log(`register`)
     }
   }
