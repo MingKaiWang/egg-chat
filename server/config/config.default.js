@@ -7,11 +7,22 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1522235643873_2355';
 
   // add your config here
-  config.middleware = [];
+  config.middleware = ['errorHandler'];
+
+  //error handle 
+  config.errorHandler = {
+    match: '/api',
+  }
+
+  exports.security = {
+    csrf: {
+      ignore: '/api',
+    }
+  }
 
   //mongoose config
   config.mongoose = {
-    url: process.env.MONGO_URL || "mongodb://mongodb:27017/eggchat",
+    url: process.env.MONGO_URL || "mongodb://localhost:27017/eggchat",
     options: {},
   }
 

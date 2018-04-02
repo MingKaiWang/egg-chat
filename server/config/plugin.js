@@ -6,3 +6,8 @@ exports.mongoose = {
     enabled: true,
     package: 'egg-mongoose',
 }
+
+exports.validate = {
+    enabled: true,
+    package: 'egg-validate',
+}
