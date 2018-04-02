@@ -11,3 +11,8 @@ exports.validate = {
     enabled: true,
     package: 'egg-validate',
 }
+
+exports.jwt = {
+    enabled: true,
+    package: 'egg-jwt',
+}

@@ -20,6 +20,11 @@ module.exports = appInfo => {
     }
   }
 
+  config.jwt = {
+    secret: "burnedfrogjwtsecret",
+    ignore: '/api/register'
+  }
+
   //mongoose config
   config.mongoose = {
     url: process.env.MONGO_URL || "mongodb://localhost:27017/eggchat",

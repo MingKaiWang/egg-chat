@@ -16,10 +16,8 @@ class UserController extends Controller {
     //注册
     async register() {
         const ctx = this.ctx
-        console.log(`--------请求数据是body: ${JSON.stringify(ctx.request.body)}--------`)
         ctx.validate(registerLoginRule)
         const result = await ctx.service.user.register(ctx.request.body)
-        console.log(`result: ${result}`)
         ctx.body = result
     }
 
