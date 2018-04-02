@@ -13,6 +13,9 @@ module.exports = () => {
             if (status === 422) {
                 ctx.body.detail = err.errors
             }
+            else if (status == 403) {
+                ctx.body.detail = "csrf error"
+            }
             ctx.status = status
         }
     }
