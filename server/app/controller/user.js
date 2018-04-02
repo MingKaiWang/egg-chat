@@ -7,8 +7,9 @@ const registerLoginRule = {
     password: 'string',
 }
 
-const tokenRule = {
-    token: 'string',
+const loginRule = {
+    username: 'string', 
+    password: 'string',
 }
 
 class UserController extends Controller {
@@ -21,18 +22,20 @@ class UserController extends Controller {
         ctx.body = result
     }
 
-    // //账号密码登入
-    // async login(username, password) {
-    //     const ctx = this.ctx
-    //     ctx.validate(registerLoginRule)
+    //账号密码登入
+    async login() {
+        const ctx = this.ctx
+        ctx.validate(loginRule)
+        const result = await ctx.service.user.login(ctx.request.body)
+        ctx.body = result
+    }
 
-    // }
-
-    // //token登入
-    // async tokenLogin(token) {
-    //     const ctx = this.ctx
-    //     ctx.validate(tokenRule)        
-    // }
+    //token登入
+    async tokenLogin(token) {
+        const ctx = this.ctx
+        const result = await ctx.service.user.tokenLogin()        
+        ctx.body = result
+    }
 
     // //登出
     // async logout() {
