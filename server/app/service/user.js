@@ -7,7 +7,7 @@ class UserService extends Service {
         super(ctx)
     }
 
-    async register(username, password) {
+    async register({username, password}) {
         let result = await this.ctx.model.User.findOne({username})
         if (result) {
             this.ctx.throw(422, `user: "${username}" is exit`)
