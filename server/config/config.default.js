@@ -22,7 +22,7 @@ module.exports = appInfo => {
 
   config.jwt = {
     secret: "burnedfrogjwtsecret",
-    ignore: '/api/register'
+    ignore: /(api\/register|api\/login)/
   }
 
   //mongoose config
