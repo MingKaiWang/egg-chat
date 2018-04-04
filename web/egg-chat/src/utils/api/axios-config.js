@@ -1,5 +1,5 @@
 import Qs from 'qs'
-import { CancelToken, http, https } from 'axios'
+import { CancelToken } from 'axios'
 
 export default {
   // `url` is the server URL that will be used for the request
@@ -127,8 +127,8 @@ export default {
   // `httpAgent` and `httpsAgent` define a custom agent to be used when performing http
   // and https requests, respectively, in node.js. This allows options to be added like
   // `keepAlive` that are not enabled by default.
-  httpAgent: new http.Agent({ keepAlive: true }),
-  httpsAgent: new https.Agent({ keepAlive: true }),
+  // httpAgent: new http.Agent({ keepAlive: true }),
+  // httpsAgent: new https.Agent({ keepAlive: true }),
 
   // 'proxy' defines the hostname and port of the proxy server
   // Use `false` to disable proxies, ignoring environment variables.
