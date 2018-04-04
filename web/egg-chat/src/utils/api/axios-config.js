@@ -19,7 +19,9 @@ export default {
   // You may modify the headers object.
   transformRequest: [function (data, headers) {
     // Do whatever you want to transform the data
-      
+    if(data && typeof(data) === 'object') {
+      data = JSON.stringify(data)
+    }
     return data;
   }],
       
@@ -32,13 +34,14 @@ export default {
   }],
       
   // `headers` are custom headers to be sent
-  headers: {'X-Requested-With': 'XMLHttpRequest'},
+  headers: {
+    'X-Requested-With': 'XMLHttpRequest', 
+    'Content-Type': 'application/json',
+  },
       
   // `params` are the URL parameters to be sent with the request
   // Must be a plain object or a URLSearchParams object
-  params: {
-    ID: 12345
-  },
+  params: {},
       
   // `paramsSerializer` is an optional function in charge of serializing `params`
   // (e.g. https://www.npmjs.com/package/qs, http://api.jquery.com/jquery.param/)
@@ -73,10 +76,7 @@ export default {
   // `auth` indicates that HTTP Basic auth should be used, and supplies credentials.
   // This will set an `Authorization` header, overwriting any existing
   // `Authorization` custom headers you have set using `headers`.
-  auth: {
-    username: 'janedoe',
-    password: 's00pers3cret'
-  },
+  auth: {},
       
   // `responseType` indicates the type of data that the server will respond with
   // options are 'arraybuffer', 'blob', 'document', 'json', 'text', 'stream'
@@ -135,14 +135,14 @@ export default {
   // supplies credentials.
   // This will set an `Proxy-Authorization` header, overwriting any existing
   // `Proxy-Authorization` custom headers you have set using `headers`.
-  proxy: {
-    host: '127.0.0.1',
-    port: 9000,
-    auth: {
-      username: 'mikeymike',
-      password: 'rapunz3l'
-    }
-  },
+  // proxy: {
+  //   host: '127.0.0.1',
+  //   port: 9000,
+  //   auth: {
+  //     username: 'mikeymike',
+  //     password: 'rapunz3l'
+  //   }
+  // },
       
   // `cancelToken` specifies a cancel token that can be used to cancel the request
   // (see Cancellation section below for details)
