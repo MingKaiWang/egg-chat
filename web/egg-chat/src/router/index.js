@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/components/Login'
-import Register from '@/components/Register'
+import Login from '@/views/Login'
+import Register from '@/views/Register'
 import iView from 'iview'
 
 Vue.use(Router)

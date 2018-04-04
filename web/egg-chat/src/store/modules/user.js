@@ -1,4 +1,5 @@
-/* eslint-disable */
+import Api from '../../utils/api'
+
 const state = {
   username: '',
   token: ''
@@ -16,8 +17,16 @@ const getters = {
 const mutations = {}
 
 const actions = {
-  register ({username, password}) {
+  async register ({username, password}) {
     // TODO: 注册
+    try {
+      const response = await Api.register({username, password})
+      console.log(response)
+      return response
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
   },
   login () {
     // TODO: 登入
