@@ -3,7 +3,11 @@ import {
   USER_LOGIN,
   USER_LOGINFAIL,
   USER_LOGINSUCESS
-} from '../types'
+} from '../mutation-types'
+
+import {
+  REGISTER
+} from '../action-types'
 
 const state = {
   username: '',
@@ -43,7 +47,7 @@ const mutations = {
 }
 
 const actions = {
-  async register (ctx, {username, password}) {
+  async [REGISTER] (ctx, {username, password}) {
     // TODO: 注册
     try {
       ctx.commit(USER_LOGIN)

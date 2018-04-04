@@ -29,6 +29,11 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import {
+  REGISTER
+} from '../store/action-types'
+
 export default {
   name: 'Register',
   data () {
@@ -42,8 +47,13 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      registerAction: REGISTER
+    }),
     register: function () {
+      const { username, password } = this
       if (this.username && this.password && this.validate && this.usernameChecked && this.passwordChecked && this.validateChecked) {
+        this.registerAction({ username, password })
         console.log(`register`)
       } else {
         this.password = ''

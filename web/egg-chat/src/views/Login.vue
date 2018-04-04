@@ -16,7 +16,7 @@
 </template>
 
 <script>
-// import { mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Login',
@@ -27,6 +27,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      
+    ]),
     login: function () {
       console.log(`username: ${this.username}, password: ${this.password}`)
     },
