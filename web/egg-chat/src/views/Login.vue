@@ -10,7 +10,7 @@
     </row>
     <br>
     <row>
-      <i-button class="resigterbutton" @click="register" type="text">regist a account !</i-button>
+      <i-button class="resigterbutton" @click="toRegister" type="text">regist a account !</i-button>
     </row>
   </div>
 </template>
@@ -27,13 +27,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
-      
-    ]),
+    ...mapActions([]),
     login: function () {
       console.log(`username: ${this.username}, password: ${this.password}`)
     },
-    register: function () {
+    toRegister: function () {
       this.$router.push('/register')
       console.log(`register`)
     }

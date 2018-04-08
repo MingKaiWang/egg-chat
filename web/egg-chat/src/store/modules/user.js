@@ -51,7 +51,7 @@ const actions = {
     // TODO: 注册
     try {
       ctx.commit(USER_LOGIN)
-      const response = await Api.register({username, password})
+      const response = await Api.Register({username, password})
       if (response) {
         // TODO: 把token取出来
         ctx.commit(USER_LOGINSUCESS, { token: 'token' })
