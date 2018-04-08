@@ -38,11 +38,12 @@ const mutations = {
   },
   [USER_LOGINFAIL]: (state, payload) => {
     state.loading = false
-    state.token = payload.token
+    state.error = payload.error
   },
   [USER_LOGINSUCESS]: (state, payload) => {
     state.loading = false
-    state.error = payload.error
+    state.token = payload.token
+    state.username = payload.username
   }
 }
 
@@ -54,7 +55,7 @@ const actions = {
       const response = await Api.Register({username, password})
       if (response && response.data.token) {
         // TODO: 把token取出来
-        ctx.commit(USER_LOGINSUCESS, { token: response.data.token })
+        ctx.commit(USER_LOGINSUCESS, { token: response.data.token, username })
       } else {
         ctx.commit(USER_LOGINFAIL, { error: 'Internet error' })
       }
