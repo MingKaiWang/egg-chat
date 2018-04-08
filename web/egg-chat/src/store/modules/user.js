@@ -52,9 +52,9 @@ const actions = {
     try {
       ctx.commit(USER_LOGIN)
       const response = await Api.Register({username, password})
-      if (response) {
+      if (response && response.data.token) {
         // TODO: 把token取出来
-        ctx.commit(USER_LOGINSUCESS, { token: 'token' })
+        ctx.commit(USER_LOGINSUCESS, { token: response.data.token })
       } else {
         ctx.commit(USER_LOGINFAIL, { error: 'Internet error' })
       }
