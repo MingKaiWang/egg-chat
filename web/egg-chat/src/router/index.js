@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '../views/Login'
 import Register from '../views/Register'
+import Chat from '../views/Chat'
 import iView from 'iview'
 
 Vue.use(Router)
@@ -18,6 +19,11 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/chat',
+      name: 'Chat',
+      component: Chat
     }
   ]
 })
