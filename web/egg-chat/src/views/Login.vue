@@ -4,9 +4,15 @@
     <row>
       <i-input class="logininput" v-model="username" placeholder="username" size="large" v-bind:maxlength=25 clearable v-bind:autofocus=true></i-input>
     </row>
+    <row v-if="!usernameChecked">
+      <span class="tips">请输入少于25个字符、数字和"-"</span>
+    </row>
     <br>
     <row>
       <i-input class="logininput" v-model="password" placeholder="password" size="large" v-bind:maxlength=25 clearable v-on:on-enter="login" type="password"></i-input>
+    </row>
+    <row v-if="!passwordChecked">
+      <span class="tips">请输入6~25个字符和数字</span>
     </row>
     <br>
     <row>
@@ -17,13 +23,16 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { checkUname, checkPwd } from '../services/check'
 
 export default {
   name: 'login',
   data () {
     return {
       username: '',
-      password: ''
+      password: '',
+      usernameChecked: true,
+      passwordChecked: true
     }
   },
   methods: {
@@ -34,6 +43,12 @@ export default {
     toRegister: function () {
       this.$router.push('/register')
       console.log(`register`)
+    },
+    checkUsername: function () {
+      this.usernameChecked = checkUname(this.username) && this.username
+    },
+    checkPassword: function () {
+      this.passwordChecked = checkPwd(this.password) && this.password
     }
   }
 }
@@ -51,5 +66,8 @@ export default {
 .resigterbutton {
   border: none;
   outline: none;
+}
+.tips {
+  color: #ff9900;
 }
 </style>
