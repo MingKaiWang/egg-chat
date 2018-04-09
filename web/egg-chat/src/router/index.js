@@ -30,11 +30,13 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  if (to.name === 'Login' || to.name === 'Register') {
+    next()
+  }
   const token = localStorage.getItem(EGG_LOGIN_TOKEN)
   if (!token) {
     next('/')
   }
-  next()
 })
 
 export default router
