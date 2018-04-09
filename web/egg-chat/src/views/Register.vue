@@ -29,7 +29,10 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import {
+  mapActions,
+  mapGetters
+} from 'vuex'
 import {
   REGISTER
 } from '../store/action-types'
@@ -73,6 +76,18 @@ export default {
     },
     login: function () {
       this.$router.push('/')
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'logined'
+    ])
+  },
+  watch: {
+    logined: function (val, oldVal) {
+      if (val && !oldVal) {
+        this.$router.push('/chat')
+      }
     }
   }
 }

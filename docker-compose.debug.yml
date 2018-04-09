@@ -1,7 +1,8 @@
 version: '3'
 
 services:
-  egg-chat:
+  # TODO: 配置服务器
+  server:
     image: egg-chat
     build: .
     environment:
@@ -11,3 +12,7 @@ services:
       - 9229:9229
     ## set your startup file here
     command: node --inspect index.js
+  # TODO: 配置web
+  web:
+  # TODO: 配置mongodb
+  mongodb:

@@ -44,6 +44,7 @@ const mutations = {
     state.loading = false
     state.token = payload.token
     state.username = payload.username
+    state.logined = true
   }
 }
 
