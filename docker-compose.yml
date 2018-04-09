@@ -7,6 +7,7 @@ services:
     environment:
       NODE_ENV: production
       MONGO_URL: mongodb://mongodb:27017/eggchat
+      REDIS_URL: redis
     depends_on:
       - mongodb
     ports:
@@ -18,6 +19,11 @@ services:
     restart: unless-stopped
     volumes:
       - /data/db:/data/db
+    networks: 
+      - egg-chat-backend
+  redis:
+    image: redis
+    restart: unless-stopped
     networks: 
       - egg-chat-backend
 networks: 

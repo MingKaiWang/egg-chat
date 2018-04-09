@@ -16,3 +16,8 @@ exports.jwt = {
     enabled: true,
     package: 'egg-jwt',
 }
+
+exports.redis = {
+    enabled: true,
+    package: 'egg-redis',
+}

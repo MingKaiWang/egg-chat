@@ -31,5 +31,15 @@ module.exports = appInfo => {
     options: {},
   }
 
+  //redis
+  config.redis = {
+    client: {
+      port: 6379,
+      host: process.env.REDIS_URL || "127.0.0.1",
+      password: 'auth',
+      db: 0,
+    }
+  }
+
   return config;
 };
