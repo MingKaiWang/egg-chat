@@ -36,6 +36,12 @@ import {
 import {
   REGISTER
 } from '../store/action-types'
+import {
+  checkUname,
+  checkPwd
+} from '../services/check'
+
+import { EGG_LOGIN_TOKEN } from '../utils/constant'
 
 export default {
   name: 'Register',
@@ -66,10 +72,10 @@ export default {
       }
     },
     checkUsername: function () {
-      this.usernameChecked = (/^[A-Za-z0-9/\-/]+$/).test(this.username) && this.username
+      this.usernameChecked = checkUname(this.username) && this.username
     },
     checkPassword: function () {
-      this.passwordChecked = (/^[A-Za-z0-9]{6,}$/).test(this.password) && this.password
+      this.passwordChecked = checkPwd(this.password) && this.password
     },
     checkValidate: function () {
       this.validateChecked = this.password && this.password === this.validate
@@ -80,13 +86,19 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'logined'
+      'logined',
+      'currentUser'
     ])
   },
   watch: {
     logined: function (val, oldVal) {
       if (val && !oldVal) {
         this.$router.push('/chat')
+      }
+    },
+    currentUser: function (val, oldVal) {
+      if (val.username && val.token) {
+        localStorage.setItem(EGG_LOGIN_TOKEN, val.token)
       }
     }
   }

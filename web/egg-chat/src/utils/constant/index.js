@@ -1,0 +1,1 @@
+export const EGG_LOGIN_TOKEN = 'EGG_LOGIN_TOKEN'

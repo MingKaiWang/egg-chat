@@ -4,11 +4,12 @@ import Login from '../views/Login'
 import Register from '../views/Register'
 import Chat from '../views/Chat'
 import iView from 'iview'
+import { EGG_LOGIN_TOKEN } from '../utils/constant'
 
 Vue.use(Router)
 Vue.use(iView)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -27,3 +28,13 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem(EGG_LOGIN_TOKEN)
+  if (!token) {
+    next('/')
+  }
+  next()
+})
+
+export default router
