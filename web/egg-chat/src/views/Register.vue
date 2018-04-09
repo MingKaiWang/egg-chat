@@ -44,7 +44,7 @@ import {
 import { EGG_LOGIN_TOKEN } from '../utils/constant'
 
 export default {
-  name: 'Register',
+  name: 'register',
   data () {
     return {
       username: '',

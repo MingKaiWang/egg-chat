@@ -13,29 +13,35 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Login',
+      redirect: '/login'
+    },
+    {
+      path: '/login',
+      name: 'login',
       component: Login
     },
     {
       path: '/register',
-      name: 'Register',
+      name: 'register',
       component: Register
     },
     {
       path: '/chat',
-      name: 'Chat',
+      name: 'chat',
       component: Chat
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.name === 'Login' || to.name === 'Register') {
+  const routers = ['login', 'register']
+  if (~routers.indexOf(to.name)) {
     next()
-  }
-  const token = localStorage.getItem(EGG_LOGIN_TOKEN)
-  if (!token) {
-    next('/')
+  } else {
+    const token = localStorage.getItem(EGG_LOGIN_TOKEN)
+    if (!token) {
+      next('/login')
+    }
   }
 })
 
