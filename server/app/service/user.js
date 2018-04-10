@@ -2,6 +2,8 @@
 
 const Service = require('egg').Service
 
+const REDIS_TOKENMAP_KEY = 'REDIS_TOKENMAP_KEY'
+
 class UserService extends Service {
     constructor(ctx) {
         super(ctx)
@@ -14,7 +16,11 @@ class UserService extends Service {
         } else {
             result = await this.ctx.model.User.create({username, password})
             const token =  this.app.jwt.sign({ _id: result._id }, this.app.config.jwt.secret)
-            return {token}
+            await this.app.redis.hmset(REDIS_TOKENMAP_KEY, { [result._id]: token })
+            return {
+                code:0,
+                token
+            }
         }
     }
 
@@ -28,7 +34,13 @@ class UserService extends Service {
                 this.ctx.throw(422, `user is not exit`)
             } else {
                 //TODO: 添加用户登录数据库状态
-                this.ctx.body = {msg: 'seccess'}
+                const token = this.app.jwt.sign({ _id: userId }, this.app.config.jwt.secret)
+                await this.app.redis.hmset(REDIS_TOKENMAP_KEY, { [userId]: token })
+                return {
+                    code: 0,
+                    msg: 'login success',
+                    token
+                }
             }
         }
     }
@@ -39,8 +51,63 @@ class UserService extends Service {
             this.ctx.throw(422, `user is not exit`)
         } else {
             //TODO: 添加用户登录数据库状态
-            const token =  this.app.jwt.sign({ _id: result._id }, this.app.config.jwt.secret)
-            return {token}
+            const token =  this.app.jwt.sign({ _id: user._id }, this.app.config.jwt.secret)
+            await this.app.redis.hmset(REDIS_TOKENMAP_KEY, { [user._id]: token })
+            return {
+                code: 0,
+                msg: 'login success',
+                token
+            }
+        }
+    }
+
+    async logout() {
+        const userId = this.ctx.state.user._id
+        if(!userId) {
+            this.ctx.throw(401, `Unauthorized`)
+        } else {
+            const user = this.ctx.model.User.findById(userId)
+            if(!user) {
+                this.ctx.throw(422, `user is not exit`)
+            } else {
+                //TODO: 添加登出的数据库状态
+                await this.app.redis.hdel(REDIS_TOKENMAP_KEY)
+                return {
+                    code: 0,
+                    msg: 'logout success' 
+                    }
+            }
+        }
+    }
+
+    async validateToken() {
+        const userId = this.ctx.state.user._id
+        if(!userId) {
+            this.ctx.throw(401, `Unauthorized`)
+        } else {
+            const token = await this.app.redis.hmget(REDIS_TOKENMAP_KEY, userId)
+            let requestToken
+            if (this.ctx.get('authorization')) {
+                const parts = this.ctx.get('authorization').split(' ')
+                if (parts.length == 2) {
+                    const scheam = parts[0]
+                    const credentials = parts[1]
+                    if (/^Bearer$/i.test(scheme)) {
+                        requestToken = credentials
+                    }
+                }
+            }
+            if (token === requestToken ) {
+                return { 
+                    code: 0,
+                    msg: 'validate success' 
+                }
+            } else {
+                return { 
+                    code: 1,
+                    msg: 'validate fail' 
+                }
+            }
         }
     }
 }
