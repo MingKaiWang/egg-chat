@@ -6,7 +6,8 @@ import {
 } from '../mutation-types'
 
 import {
-  REGISTER
+  REGISTER,
+  LOGIN
 } from '../action-types'
 
 const state = {
@@ -50,12 +51,10 @@ const mutations = {
 
 const actions = {
   async [REGISTER] (ctx, {username, password}) {
-    // TODO: 注册
     try {
       ctx.commit(USER_LOGIN)
       const response = await Api.Register({username, password})
       if (response && response.data.token) {
-        // TODO: 把token取出来
         ctx.commit(USER_LOGINSUCESS, { token: response.data.token, username })
       } else {
         ctx.commit(USER_LOGINFAIL, { error: 'Internet error' })
@@ -68,8 +67,21 @@ const actions = {
       throw error
     }
   },
-  login () {
-    // TODO: 登入
+  async [LOGIN] (ctx, {username, password}) {
+    try {
+      ctx.commit(USER_LOGIN)
+      const response = await Api.Login({username, password})
+      if (response && response.data.token) {
+        ctx.commit(USER_LOGINSUCESS, {token: response.data.token, username})
+      } else {
+        ctx.commit(USER_LOGINFAIL, { error: 'Internet error' })
+      }
+      return response
+    } catch (error) {
+      ctx.commit(USER_LOGINFAIL, { error })
+      console.log(error)
+      throw error
+    }
   },
   logout () {
     // TODO: 登出

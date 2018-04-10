@@ -86,19 +86,14 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'logined',
       'currentUser'
     ])
   },
   watch: {
-    logined: function (val, oldVal) {
-      if (val && !oldVal) {
-        this.$router.push('/chat')
-      }
-    },
     currentUser: function (val, oldVal) {
       if (val.username && val.token) {
         localStorage.setItem(EGG_LOGIN_TOKEN, val.token)
+        this.$router.push('/chat')
       }
     }
   }

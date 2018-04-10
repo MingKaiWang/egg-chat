@@ -4,13 +4,13 @@ export default {
   Register ({ username, password }) {
     return fetch.post('/api/register', { username, password })
   },
-  Login (params) {
-    return fetch.get('/api/login')
+  Login ({username, password}) {
+    return fetch.post('/api/login', { username, password })
   },
-  TokenLogin (token) {
-    return fetch.get('/api/tokenLogin', token)
+  TokenLogin () {
+    return fetch.get('/api/tokenLogin')
   },
-  Logout (token) {
-    return fetch.get('/api/logout', token)
+  Logout () {
+    return fetch.get('/api/logout')
   }
 }

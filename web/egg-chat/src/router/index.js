@@ -41,6 +41,8 @@ router.beforeEach((to, from, next) => {
     const token = localStorage.getItem(EGG_LOGIN_TOKEN)
     if (!token) {
       next('/login')
+    } else {
+      next()
     }
   }
 })
