@@ -31,16 +31,25 @@ class UserController extends Controller {
     }
 
     //token登入
-    async tokenLogin(token) {
+    async tokenLogin() {
         const ctx = this.ctx
         const result = await ctx.service.user.tokenLogin()        
         ctx.body = result
     }
 
-    // //登出
-    // async logout() {
-    //     const ctx = this.ctx
-    // }
+    //登出
+    async logout() {
+        const ctx = this.ctx
+        const result = await ctx.service.user.logout()
+        ctx.body = result
+    }
+
+    //验证token
+    async validateToken() {
+        const ctx = this.ctx
+        const result = await ctx.service.user.validateToken()
+        ctx.body = result
+    }
   }
   
   module.exports = UserController;
