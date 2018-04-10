@@ -9,6 +9,7 @@ class UserService extends Service {
         super(ctx)
     }
 
+    // 注册
     async register({username, password}) {
         let result = await this.ctx.model.User.findOne({username})
         if (result) {
@@ -24,6 +25,7 @@ class UserService extends Service {
         }
     }
 
+    // token登入
     async tokenLogin() {
         const userId = this.ctx.state.user._id
         if(!userId) {
@@ -33,7 +35,6 @@ class UserService extends Service {
             if (!user) {
                 this.ctx.throw(422, `user is not exit`)
             } else {
-                //TODO: 添加用户登录数据库状态
                 const token = this.app.jwt.sign({ _id: userId }, this.app.config.jwt.secret)
                 await this.app.redis.hmset(REDIS_TOKENMAP_KEY, { [userId]: token })
                 return {
@@ -45,12 +46,12 @@ class UserService extends Service {
         }
     }
     
+    // 账号密码登入
     async login({username, password}) {
         const user = await this.ctx.model.User.findOne({username})
         if(!user) {
             this.ctx.throw(422, `user is not exit`)
         } else {
-            //TODO: 添加用户登录数据库状态
             const token =  this.app.jwt.sign({ _id: user._id }, this.app.config.jwt.secret)
             await this.app.redis.hmset(REDIS_TOKENMAP_KEY, { [user._id]: token })
             return {
@@ -61,6 +62,7 @@ class UserService extends Service {
         }
     }
 
+    // 登出
     async logout() {
         const userId = this.ctx.state.user._id
         if(!userId) {
@@ -70,7 +72,6 @@ class UserService extends Service {
             if(!user) {
                 this.ctx.throw(422, `user is not exit`)
             } else {
-                //TODO: 添加登出的数据库状态
                 await this.app.redis.hdel(REDIS_TOKENMAP_KEY)
                 return {
                     code: 0,
@@ -80,6 +81,7 @@ class UserService extends Service {
         }
     }
 
+    // 校验token
     async validateToken() {
         const userId = this.ctx.state.user._id
         if(!userId) {
