@@ -41,5 +41,15 @@ module.exports = appInfo => {
     }
   }
 
+  config.io = {
+    init: {},
+    namespace: {
+      '/': {
+        connectionMiddleware: [],
+        packetMiddleware: [],
+      }
+    }
+  }
+
   return config;
 };

@@ -21,3 +21,8 @@ exports.redis = {
     enabled: true,
     package: 'egg-redis',
 }
+
+exports.io = {
+    enabled: true,
+    package: 'egg-socket.io',
+}
