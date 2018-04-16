@@ -1,10 +1,11 @@
 module.exports = app => {
     const mongoose = app.mongoose
     const Schema = mongoose.Schema
+    const ObjectId = mongoose.Schema.Types.ObjectId
     
     const MessageSchema = new Schema({
-        rid: { type: String },
-        createBy: { type: String },
+        rid: { type: ObjectId },
+        createBy: { type: ObjectId },
         type: { type: Number },
         content: { type: String }
     }, {
