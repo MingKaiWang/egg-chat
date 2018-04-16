@@ -3,10 +3,10 @@ module.exports = app => {
     const Schema = mongoose.Schema
     
     const MessageSchema = new Schema({
-        room: { type: String },
+        rid: { type: String },
         createBy: { type: String },
-        messageType: { type: Number },
-        messageContent: { type: String }
+        type: { type: Number },
+        content: { type: String }
     }, {
         timestamps: true
     });

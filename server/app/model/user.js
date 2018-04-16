@@ -4,7 +4,11 @@ module.exports = app => {
     
     const UserSchema = new Schema({
         username: { type: String },
-        password: { type: String }
+        password: { type: String },
+        name: { type: String, default: 'user' },
+        avatar: { type: String, default: '' },
+        status: { type: Number, default: 0 },
+        allowMultitermimalLogin: { type: Boolean, default: false }
     }, {
         timestamps: true
     });
