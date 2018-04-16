@@ -5,8 +5,8 @@ module.exports = app => {
     const RoomSchema = new Schema({
         name: { type: String },
         owner: { type: String },
-        managers: [[String]],
-        users: [[String]],
+        managers: [String],
+        users: [String],
         info: { type: String }
     }, {
         timestamps: true
