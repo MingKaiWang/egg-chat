@@ -17,7 +17,6 @@ class UserService extends Service {
         } else {
             result = await this.ctx.model.User.create({username, password})
             const token =  this.app.jwt.sign({ _id: result._id }, this.app.config.jwt.secret)
-            // await this.app.redis.hmset(REDIS_TOKENMAP_KEY, { [result._id]: token })
             await this.service.db.addToken({userId: result._id, token})
             return {
                 code:0,
@@ -55,8 +54,7 @@ class UserService extends Service {
             this.ctx.throw(422, `user is not exit`)
         } else {
             const token =  this.app.jwt.sign({ _id: user._id }, this.app.config.jwt.secret)
-            // await this.app.redis.hmset(REDIS_TOKENMAP_KEY, { [user._id]: token })
-            await this.service.db.addToken({userId: result._id, token})       
+            await this.service.db.addToken({userId: user._id, token})       
             return {
                 code: 0,
                 msg: 'login success',
@@ -75,7 +73,6 @@ class UserService extends Service {
             if(!user) {
                 this.ctx.throw(422, `user is not exit`)
             } else {
-                // await this.app.redis.hdel(REDIS_TOKENMAP_KEY)
                 let requestToken
                 if (this.ctx.get('authorization')) {
                     const parts = this.ctx.get('authorization').split(' ')
