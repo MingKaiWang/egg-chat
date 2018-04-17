@@ -14,50 +14,72 @@ class DBServices extends Service {
 
     async addToken({ userId, token }) {
         let tokensStr = await this.app.redis.hmget(REDIS_TOKENMAP_KEY, userId)
-        const tokens = JSON.parse(tokensStr)
+        let tokens
+        if (!tokensStr) {
+            tokens = [] 
+        } else if (typeof(tokensStr) === 'string') {
+            tokens = JSON.parse(tokensStr)
+        } else if (typeof(tokensStr) === 'object') {
+            tokens = tokensStr
+        }
         tokens.push(token)
+        if (tokens.length > 3) { tokens.shift() }
         tokensStr = JSON.stringify(tokens)
-        const result = this.app.redis.hmset(REDIS_TOKENMAP_KEY, { [userId]: tokensStr })
-        return result
+        return this.app.redis.hmset(REDIS_TOKENMAP_KEY, { [userId]: tokensStr })
     }
 
     async removeToken({ userId, token }) {
         let tokensStr = await this.app.redis.hmget(REDIS_TOKENMAP_KEY, userId)
-        let tokens = JSON.parse(tokensStr)
+        let tokens 
+        if (!tokensStr) {
+            tokens = [] 
+        } else if (typeof(tokensStr) === 'string') {
+            tokens = JSON.parse(tokensStr)
+        } else if (typeof(tokensStr) === 'object') {
+            tokens = tokensStr
+        }
         tokens = tokens.filter(t =>  t !== token )
         tokensStr = JSON.stringify(tokens)
-        const result = this.app.redis.hmset(REDIS_TOKENMAP_KEY, { [userId]: tokensStr })
-        return result
+        return this.app.redis.hmset(REDIS_TOKENMAP_KEY, { [userId]: tokensStr })
+    }
+
+    async exitToken({ userId, token }) {
+        let tokensStr = await this.app.redis.hmget(REDIS_TOKENMAP_KEY, userId)
+        let tokens 
+        if (!tokensStr) {
+            tokens = [] 
+        } else if (typeof(tokensStr) === 'string') {
+            tokens = JSON.parse(tokensStr)
+        } else if (typeof(tokensStr) === 'object') {
+            tokens = tokensStr
+        }
+        return ~tokens.indexOf(token)
     }
 
     async addOnlineSocket({ token, socketId }) {
-        const result = await this.app.redis.hmset(REDIS_ONLINE_SOCKET_KEY, { [token]: socketId })
-        return result
+        return this.app.redis.hmset(REDIS_ONLINE_SOCKET_KEY, { [token]: socketId })
     }
 
     async removeOnlineSocket({ token, socketId }) {
-        const result = await this.app.redis.hdel(REDIS_ONLINE_SOCKET_KEY, token)
-        return result
+        return this.app.redis.hdel(REDIS_ONLINE_SOCKET_KEY, token)
     }
 
     async getUserStatus({ token }) {
-        const result = await this.app.redis.hmget(REDIS_USER_STATUS_KEY, token)
-        return result
+        return this.app.redis.hmget(REDIS_USER_STATUS_KEY, token)
     }
     
     async setUserStatus({ token, status }) {
-        const result = await this.app.redis.hmset(REDIS_USER_STATUS_KEY, { [token]: status })
-        return result
+        return this.app.redis.hmset(REDIS_USER_STATUS_KEY, { [token]: status })
     }
 
     async getUserReadyEvent({ token, event }) {
-        const result = await this.app.redis.hmget(REDIS_USER_READY_EVENT_KEY, token+event )
-        return result
+        return this.app.redis.hmget(REDIS_USER_READY_EVENT_KEY, token+event )
     }
 
     async setUserReadyEvent({ token, event, ready=true }) {
-        const result = await this.app.redis.hmset(REDIS_USER_READY_EVENT_KEY, { [token+event]: ready })
-        return result
+        return this.app.redis.hmset(REDIS_USER_READY_EVENT_KEY, { [token+event]: ready })
     }
 
 }
+
+module.exports = DBServices

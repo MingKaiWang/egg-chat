@@ -12,5 +12,5 @@ module.exports = app => {
     }, {
         timestamps: true
     });
-    return mongoose.model('Message', RoomSchema)
+    return mongoose.model('Room', RoomSchema)
 }
