@@ -53,7 +53,7 @@ class DBServices extends Service {
         } else if (typeof(tokensStr) === 'object') {
             tokens = tokensStr
         }
-        return ~tokens.indexOf(token)
+        return !!~tokens.indexOf(token)
     }
 
     async addOnlineSocket({ token, socketId }) {
