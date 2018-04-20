@@ -2,6 +2,6 @@
 
 const Controller = require('egg').Controller
 
-class UserController extends Controller {
+class SystemController extends Controller {
     
 }

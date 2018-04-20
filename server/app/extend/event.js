@@ -1,0 +1,6 @@
+'use strict'
+
+module.exports = {
+    CREATE_GROUP_ROOM: 'CREATE_GROUP_ROOM',
+    CREATE_DIRECT_ROOM: 'CREATE_DIRECT_ROOM'
+}
