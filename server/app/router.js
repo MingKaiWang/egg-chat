@@ -11,4 +11,5 @@ module.exports = app => {
   router.get('/api/tokenLogin', controller.user.tokenLogin)
   router.get('/api/logout', controller.user.logout)
   router.get('/api/validateToken', controller.user.validateToken)
+  router.get('/api/getAllUsers', controller.user.getAllUsers)
 };

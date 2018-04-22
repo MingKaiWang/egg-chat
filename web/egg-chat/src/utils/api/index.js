@@ -7,10 +7,13 @@ export default {
   Login ({username, password}) {
     return fetch.post('/api/login', { username, password })
   },
-  TokenLogin () {
-    return fetch.get('/api/tokenLogin')
+  TokenLogin ({ token }) {
+    return fetch.get('/api/tokenLogin', token)
   },
-  Logout () {
-    return fetch.get('/api/logout')
+  Logout ({ token }) {
+    return fetch.get('/api/logout', token)
+  },
+  GetAllUsers ({ token }) {
+    return fetch.get('api/getAllUsers', token)
   }
 }

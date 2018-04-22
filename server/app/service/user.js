@@ -125,6 +125,16 @@ class UserService extends Service {
             }
         }
     }
+
+    async getAllUsers () {
+        const userId = this.ctx.state.user._id
+        if(!userId) {
+            this.ctx.throw(401, `Unauthorized`)
+        } else {
+            const users = await this.ctx.model.User.find({})
+            return this.ctx.helper.parseRes({ code: 0, Msg: 'success'}, { users })
+        }
+    }
 }
 
 module.exports = UserService

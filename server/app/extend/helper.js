@@ -18,5 +18,14 @@ module.exports = {
             meta,
             reault: { action, payload }
         }
+    },
+    parseRes(payload={}, metadata={}) {
+        const meta = Object.assign({},{
+            timestamp: Date.now(),
+        }, metadata)
+        return {
+            meta,
+            result: { payload }
+        }
     }
 }

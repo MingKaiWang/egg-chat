@@ -50,6 +50,13 @@ class UserController extends Controller {
         const result = await ctx.service.user.validateToken()
         ctx.body = result
     }
+
+    //获取所有用户
+    async getAllUsers() {
+        const ctx = this.ctx
+        const result = await ctx.service.user.getAllUsers()
+        ctx.body = result
+    }
   }
   
   module.exports = UserController;
