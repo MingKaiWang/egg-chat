@@ -9,7 +9,6 @@ export const USER_REGISTER = 'USER_REGISTER' // 注册
 export const USER_REGISTERFAIL = 'USER_REGISTERFAIL' // 注册失败
 export const USER_REGISTERSUCCESS = 'USER_REGISTERSUCCESS' // 注册成功
 
-export const CHAT_GET_USER_LIST = 'CHAT_GET_USER_LIST' //获取用户列表
-export const CHAT_GET_USER_LIST_FAIL = 'CHAT_GET_USER_LIST_FAIL' //获取用户列表失败
-export const CHAT_GET_USER_LIST_SUCCESS = 'CHAT_GET_USER_LIST_SUCCESS' //获取用户列表成功
-
+export const CHAT_GET_USER_LIST = 'CHAT_GET_USER_LIST' // 获取用户列表
+export const CHAT_GET_USER_LIST_FAIL = 'CHAT_GET_USER_LIST_FAIL' // 获取用户列表失败
+export const CHAT_GET_USER_LIST_SUCCESS = 'CHAT_GET_USER_LIST_SUCCESS' // 获取用户列表成功

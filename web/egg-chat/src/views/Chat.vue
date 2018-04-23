@@ -32,7 +32,7 @@ export default {
   data () {
     return {}
   },
-  mounted: function(){
+  mounted: function () {
 
   },
   methods: {
