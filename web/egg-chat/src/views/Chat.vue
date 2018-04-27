@@ -30,7 +30,10 @@ import {
 export default {
   name: 'chat',
   data () {
-    return {}
+    return {
+      title: '',
+      messages: []
+    }
   },
   mounted: function () {
 
