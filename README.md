@@ -7,5 +7,5 @@ Run the application with run.sh in the root folder.
 ```bash
 $ ./run.sh
 ```
-Then open your brower with [http://localhost:7001/public/index.html#/](http://localhost:7001/public/index.html#/).
+Then open your browser with [http://localhost:7001/public/index.html#/](http://localhost:7001/public/index.html#/).
 Enjory it!
